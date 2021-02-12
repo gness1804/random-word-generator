@@ -8,15 +8,18 @@
   "scripts": {
     "build:watch": "tsc -w",
     "build": "tsc --noEmit src/",
-    "start": "nodemon dist/index.js",
-    "lint": "eslint ."
+    "dev": "nodemon dist/index.js",
+    "lint": "eslint .",
+    "start": "concurrently \"yarn build:watch\" \"yarn dev\""
   },
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^4.15.0",
     "@typescript-eslint/parser": "^4.15.0",
+    "concurrently": "^5.3.0",
     "eslint": "^7.19.0",
     "express": "^4.17.1",
     "nodemon": "^2.0.7",
+    "prettier": "^2.2.1",
     "ts-node": "^9.1.1",
     "typescript": "^4.1.5"
   },
