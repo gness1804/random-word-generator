@@ -10,8 +10,13 @@
     "build": "tsc --noEmit src/",
     "dev": "nodemon dist/index.js",
     "lint": "eslint .",
-    "start": "concurrently \"yarn build:watch\" \"yarn dev\""
+    "start": "concurrently \"yarn build:watch\" \"yarn dev\"",
+    "no-console": "bash ../../githooks/dist/noConsole.sh"
   },
+  "pre-commit": [
+    "no-console",
+    "lint"
+  ],
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^4.15.0",
     "@typescript-eslint/parser": "^4.15.0",
@@ -25,6 +30,7 @@
   },
   "devDependencies": {
     "@types/express": "^4.17.11",
-    "@types/node": "^14.14.26"
+    "@types/node": "^14.14.26",
+    "pre-commit": "^1.2.2"
   }
 }
