@@ -10,6 +10,7 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 app.listen(8080, () => {
+  /* eslint-disable-next-line no-console */
   console.info('Server running on port 8080.');
 });
 
