@@ -1,0 +1,12 @@
+{
+  "name": "random-word-generator",
+  "version": "1.0.0",
+  "description": "Generates a random word",
+  "main": "index.js",
+  "author": "Graham Nessler",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "ts-node": "^9.1.1"
+  }
+}
