@@ -3,7 +3,10 @@ import express, { Request, Response } from 'express';
 const app = express();
 
 app.get('/', (req: Request, res: Response) => {
-  res.send('Hello world!');
+  res.header({
+    'Access-Control-Allow-Origin': '*',
+  });
+  res.json({ message: 'Hello world' });
 });
 
 app.listen(8080, () => {
