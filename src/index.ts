@@ -5,10 +5,15 @@ import path = require('path');
 const app = express();
 
 app.get('/', async (req: express.Request, res: express.Response) => {
+  const { maxWordLength = 6 } = req.query;
   const file = path.join(__dirname, '../src/words.json');
   const words = await fs.promises.readFile(file, 'utf-8');
-  const parsedWords: string[] = JSON.parse(words);
-  const randomIndex = Math.floor(Math.random() * (parsedWords.length - 0 + 1) + 0);
+  const parsedWords: string[] = JSON.parse(words).filter(
+    (word: string) => word.length <= maxWordLength,
+  );
+  const randomIndex = Math.floor(
+    Math.random() * (parsedWords.length - 0 + 1) + 0,
+  );
   const word = parsedWords[randomIndex];
 
   res.header({

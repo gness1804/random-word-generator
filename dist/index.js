@@ -41,15 +41,16 @@ var fs = require("fs");
 var path = require("path");
 var app = express();
 app.get('/', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var file, words, parsedWords, randomIndex, word;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
+    var _a, maxWordLength, file, words, parsedWords, randomIndex, word;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
             case 0:
+                _a = req.query.maxWordLength, maxWordLength = _a === void 0 ? 6 : _a;
                 file = path.join(__dirname, '../src/words.json');
                 return [4 /*yield*/, fs.promises.readFile(file, 'utf-8')];
             case 1:
-                words = _a.sent();
-                parsedWords = JSON.parse(words);
+                words = _b.sent();
+                parsedWords = JSON.parse(words).filter(function (word) { return word.length <= maxWordLength; });
                 randomIndex = Math.floor(Math.random() * (parsedWords.length - 0 + 1) + 0);
                 word = parsedWords[randomIndex];
                 res.header({
