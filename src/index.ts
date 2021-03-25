@@ -1,20 +1,19 @@
 import express = require('express');
-import fs = require('fs');
-import path = require('path');
+import words = require('./words');
 
 const app = express();
 
-app.get('/', async (req: express.Request, res: express.Response) => {
+app.get('/', (req: express.Request, res: express.Response) => {
   const { maxWordLength = 6 } = req.query;
-  const file = path.join(__dirname, '../src/words.json');
-  const words = await fs.promises.readFile(file, 'utf-8');
-  const parsedWords: string[] = JSON.parse(words).filter(
-    (word: string) => word.length <= maxWordLength,
-  );
+  const filteredWords = words.words
+    .split(',')
+    .filter((word: string) => word.length <= maxWordLength)
+    .map((word) => word.toLowerCase());
+
   const randomIndex = Math.floor(
-    Math.random() * (parsedWords.length - 0 + 1) + 0,
+    Math.random() * (filteredWords.length - 0 + 1) + 0,
   );
-  const word = parsedWords[randomIndex];
+  const word = filteredWords[randomIndex];
 
   res.header({
     'Access-Control-Allow-Origin': '*',
